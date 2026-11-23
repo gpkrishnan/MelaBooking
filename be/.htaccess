@@ -1,0 +1,5 @@
+# Some hosts (CGI/FastCGI) drop the Authorization header before PHP sees it.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+</IfModule>

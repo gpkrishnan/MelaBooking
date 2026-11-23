@@ -1,0 +1,80 @@
+*ராதேகிருஷ்ணா*
+
+உங்கள் கோரிக்கையின்படி, *பண்டரிபுரம் நாமஸங்கீர்த்தன மேளா 2027*க்கான உங்கள் பதிவு கீழே குறிப்பிடப்பட்டபடி மாற்றப்பட்டுள்ளது.
+
+*பதிவு எண்:* {registrationRef}
+
+*பதிவு விவரங்கள்:*  
+*பெயர்:* {groupHeadName}  
+*தொலைபேசி எண்:* {phone}  
+*தங்கும் இட வகை:* {accommodationDetails}  
+*அறை பகிர்வு:* {roomOccupancyTa}
+*நாட்கள்:* பிப்ரவரி 3 (புதன்) காலை – 7 (ஞாயிறு) மதியம் 12:00, 2027  
+
+*பதிவுசெய்யப்பட்ட உறுப்பினர்கள்:*  
+{membersDetails}
+
+*மொத்த செலுத்த வேண்டிய தொகை:* {payableAmount}  
+*இதுவரை பெறப்பட்ட தொகை:* {amount}  
+*மீதமுள்ள செலுத்த வேண்டிய தொகை:* {payableBalanceAmount}
+
+உங்கள் பதிவு உறுதிப்படுத்தப்படும் வகையில், தயவுசெய்து *{paymentDueDate}*க்குள் கட்டணத்தை முடிக்கவும்.
+
+*கட்டண விவரங்கள்:*  
+வங்கி பெயர்: City Union Bank Ltd.  
+கணக்கு பெயர்: *Krishna Kudumbam Charitable & Religious Trust*  
+கணக்கு எண்: 500101013219690  
+IFSC குறியீடு: CIUB0000211  
+கிளை: சாயிபாபா காலனி, கோயம்புத்தூர்  
+Google Pay / UPI தொலைபேசி எண்: 99439 11030  
+Google Pay / UPI ஐடி: krishnakudumbamcrt@okicici  
+
+கட்டணம் செலுத்திய பிறகு, உங்கள் *பெயர்* மற்றும் *பதிவு எண்* உடன் *பரிவர்த்தனை ஸ்கிரீன்‌ஷாட்* பகிரவும்.
+
+அன்புடன்,  
+*Krishna Kudumbam Charitable & Religious Trust*   
+ஹரே ராம ஹரே ராம ராம ராம ஹரே ஹரே  
+ஹரே கிருஷ்ண ஹரே கிருஷ்ண கிருஷ்ண கிருஷ்ண ஹரே ஹரே
+
+   
+---------------------------
+
+
+*Radhekrishna*
+
+Your registration for the *Pandharpur Nama Sankeerthana Mela 2027* has been modified as below as per your request.
+
+*Registration No:* {registrationRef}
+
+*Registration Details:*
+*Your Name:* {groupHeadName}
+*Contact No:* {phone}
+*Accommodation Type:* {accommodationDetails}
+*Room occupancy:* {roomOccupancy}
+*Dates:* February 3rd (Wed) morning – 7th (Sun) 12:00 noon, 2027
+
+*Registered Members*
+{membersDetails}
+
+
+*Total Payable Amount:* {payableAmount}
+*Amount Received so far:* {amount}  
+*Balance Payable Amount:* {payableBalanceAmount}
+
+Please complete your registration by making the payment before *{paymentDueDate}*.
+
+*Payment Details:*
+Bank Name: City Union Bank Ltd.  
+Account Name: *Krishna Kudumbam Charitable & Religious Trust*  
+Account Number: 500101013219690
+IFSC Code: CIUB0000211 
+Branch: Saibaba Colony Coimbatore  
+Google Pay / UPI Phone No: 99439 11030
+Google Pay / UPI ID: krishnakudumbamcrt@okicici
+
+After completing payment, please share the *transaction screenshot* to this number along with your *Name* and *Registration Reference No.*
+
+With prayers,  
+*Krishna Kudumbam Charitable & Religious Trust*  
+Hare Rama Hare Rama Rama Rama Hare Hare 
+Hare Krishna Hare Krishna Krishna Krishna Hare Hare

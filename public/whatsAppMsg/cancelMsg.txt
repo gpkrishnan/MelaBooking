@@ -1,0 +1,31 @@
+*ராதேகிருஷ்ணா*
+
+உங்கள் கோரிக்கையின்படி, *பண்டரிபுரம் நாமஸங்கீர்த்தன மேளா 2027*க்கான உங்கள் பதிவு *ரத்து செய்யப்பட்டுள்ளது.*
+
+*பதிவு குறிப்பு எண்:* {registrationRef}  
+*பெயர்:* {groupHeadName}  
+*தொலைபேசி எண்:* {phone}
+
+உங்கள் கட்டணத் தொகை (ஏதாவது மீதம் இருந்தால்) 2 / 3 நாட்களுக்குள் திருப்பி அனுப்பப்படும்.
+
+அன்புடன்,  
+*Krishna Kudbumam Charitable & Religious Trust*   
+ஹரே ராம ஹரே ராம ராம ராம ஹரே ஹரே  
+ஹரே கிருஷ்ண ஹரே கிருஷ்ண கிருஷ்ண கிருஷ்ண ஹரே ஹரே
+
+-------------------------------
+
+*Radhekrishna*
+
+We regret to inform you that your registration for the *Pandharpur Nama Sankeerthana Mela 2027* has been *cancelled* as per your request.
+
+*Registration Reference No:* {registrationRef}  
+*Name:* {groupHeadName}  
+*Contact No:* {phone}
+
+We shall refund the payment (if any) in 2/3 Days..
+
+With prayers,  
+*Krishna Kudbumam Charitable & Religious Trust*  
+Hare Rama Hare Rama Rama Rama Hare Hare   
+Hare Krishna Hare Krishna Krishna Krishna Hare Hare

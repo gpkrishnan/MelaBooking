@@ -1,0 +1,51 @@
+{
+  "family": {
+    "familyid": 0,
+    "groupNo": "New",
+    "leader": "",
+    "city": "",
+    "citygroup": 1,
+    "whatsapp": "",
+    "phone2": "",
+    "address": "",
+    "fremarks": ""
+  },
+  "booking": {
+    "booking_date": "",
+    "bill_amount": "",
+    "recd_amount": "",
+    "receipt_date": "",
+    "pay_mode": "",
+    "pay_detail": "",
+    "booking_status": "R",
+    "receipt_no": "",
+    "ledger_id": "",
+    "prebooking_id": 0
+  },
+  "member": {
+    "memberid": 0,
+    "name": "",
+    "photoidno": "",
+    "phone": "",
+    "age": "",
+    "sex": "M",
+    "p_roomtype": "N",
+    "p_toilet": "N",
+    "p_cot": "N",
+    "p_floor": "N",
+    "arr_mode": "T",
+    "arr_train_no": "",
+    "arr_seat_no": "-",
+    "arr_time": "2027-02-03 06:00:00",
+    "arr_city": "Pandharpur",
+    "pickup_bus": 1,
+    "checkin_time": "2027-02-03 06:00:00",
+    "checkout_time": "2027-02-07 12:00:00",
+    "dep_mode": "T",
+    "dep_train_no": "",
+    "dep_seat_no": "",
+    "dep_time": "2027-02-07 18:00:00",
+    "dep_city": "Pandharpur",
+    "drop_bus": 1
+  }
+}

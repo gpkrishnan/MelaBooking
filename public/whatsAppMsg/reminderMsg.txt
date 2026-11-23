@@ -1,0 +1,70 @@
+*ராதேகிருஷ்ணா*
+
+*பண்டரிபுரம் நாமஸங்கீர்த்தன மேளா 2027*க்கான உங்கள் பதிவு கட்டணத்தை நிறைவு செய்யும் நினைவூட்டல் செய்தி இது.
+
+*பதிவு குறிப்பு எண்:* {registrationRef}  
+*பெயர்:* {groupHeadName}  
+*தொலைபேசி எண்:* {phone}  
+*தங்கும் இட வகை:* {accommodationDetails}  
+*அறை பகிர்வு:* {roomOccupancyTa}
+*நாட்கள்:* பிப்ரவரி 3 (புதன்) காலை – 7 (ஞாயிறு) மதியம் 12:00, 2027  
+
+*பதிவுசெய்யப்பட்ட உறுப்பினர்கள்:*  
+{membersDetails}
+
+உங்கள் பதிவு மற்றும் தங்கும் ஏற்பாடுகள் உறுதியாகும் வகையில், தயவுசெய்து உடனே கட்டணத்தை செலுத்தவும்.
+
+*செலுத்த வேண்டிய மீதி தொகை:* {payableBalanceAmount}
+
+*கட்டண விவரங்கள்:*  
+வங்கி பெயர்: City Union Bank Ltd.  
+கணக்கு பெயர்: *Krishna Kudumbam Charitable & Religious Trust*  
+கணக்கு எண்: 500101013219690  
+IFSC குறியீடு: CIUB0000211  
+கிளை: சாயிபாபா காலனி, கோயம்புத்தூர்  
+Google Pay / UPI தொலைபேசி எண்: 99439 11030  
+Google Pay / UPI ஐடி: krishnakudumbamcrt@okicici  
+
+கட்டணம் செலுத்திய பிறகு, உங்கள் *பெயர்* மற்றும் *பதிவு குறிப்பு எண்* உடன் *பரிவர்த்தனை ஸ்கிரீன்‌ஷாட்* பகிரவும்.
+
+அன்புடன்,  
+*Krishna Kudumbam Charitable & Religious Trust*  
+ஹரே ராம ஹரே ராம ராம ராம ஹரே ஹரே 
+ஹரே கிருஷ்ண ஹரே கிருஷ்ண கிருஷ்ண கிருஷ்ண ஹரே ஹரே
+
+
+---------------------
+
+*Radhekrishna*
+
+This is a gentle reminder to complete your registration payment for the *Pandharpur Nama Sankeerthana Mela 2027.*
+
+*Registration Reference No:* {registrationRef}  
+*Name:* {groupHeadName}  
+*Contact No:* {phone}
+*Accommodation Type:* {accommodationDetails}
+*Room occupancy:* {roomOccupancy}
+*Dates:* February 3rd (Wed) morning – 7th (Sun) 12:00 noon, 2027
+
+*Registered Members*
+{membersDetails}
+
+Please complete your payment immediately to confirm your registration and accommodation.
+
+*Balance Payable Amount:* {payableBalanceAmount}
+
+*Payment Details:*
+Bank Name: City Union Bank Ltd.  
+Account Name: *Krishna Kudumbam Charitable & Religious Trust*  
+Account Number: 500101013219690
+IFSC Code: CIUB0000211 
+Branch: Saibaba Colony Coimbatore  
+Google Pay / UPI Phone No: 99439 11030
+Google Pay / UPI ID: krishnakudumbamcrt@okicici
+
+After making the payment, kindly share the *transaction screenshot* along with your *Name* and *Registration Reference No.*
+
+With prayers,  
+*Krishna Kudumbam Charitable & Religious Trust*  
+Hare Rama Hare Rama Rama Rama Hare Hare  
+Hare Krishna Hare Krishna Krishna Krishna Hare Hare

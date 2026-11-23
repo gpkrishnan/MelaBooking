@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# server secrets
+be/base/secrets.php
+
+# production upload folder
+/deploy/
+
+# uploaded ID proofs
+be/storage/

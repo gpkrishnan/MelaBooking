@@ -1,0 +1,68 @@
+*ராதேகிருஷ்ணா*
+
+*பண்டரிபுரம் நாமஸங்கீர்த்தன மேளா 2027*க்கான உங்கள் *தங்கும் இட விவரங்களை* பகிர்வதில் மகிழ்ச்சி அடைகிறோம்.
+
+*பதிவு குறிப்பு எண்:* {registrationRef}  
+*பெயர்:* {groupHeadName}  
+*தொலைபேசி எண்:* {phone}
+
+*பதிவான உறுப்பினர்கள் (ஹோட்டல் பெயர், ரூம் நம்பர்):*  
+{membersDetailswithRoomDetails}  
+
+*ஹோட்டல் முகவரி:*  
+{hotelAddress}
+
+
+Check-In : 03/Feb/2027 : Morning
+Check-Out: 07/Feb/2027 : 12:00 Noon
+
+*மேளா நடைபெறும் இடம்*
+பண்டரிபுரம் (விட்டலன் கோவிலிலிருந்து சுமார் 500 மீட்டர்)
+📞 +91 99439 11030
+*அறை பகிர்வு:* {roomOccupancyTa}
+
+
+
+குறிப்பு: நிர்வாக தேவைகளின் அடிப்படையில் அறை / ஹோட்டல் ஒதுக்கீடுகள் மாற்றத்திற்கு உட்பட்டவை.
+
+அன்புடன்,  
+*Krishna Kudumbam Charitable & Religious Trust*  
+ஹரே ராம ஹரே ராம ராம ராம ஹரே ஹரே 
+ஹரே கிருஷ்ண ஹரே கிருஷ்ண கிருஷ்ண கிருஷ்ண ஹரே ஹரே
+
+
+
+--------------------
+
+*Radhekrishna*
+
+We are happy to share your *Accommodation Details* for the *Pandharpur Nama Sankeerthana Mela 2027.*
+
+*Registration Reference No:* {registrationRef}  
+*Name:* {groupHeadName}  
+*Contact No:* {phone}
+
+*Registered Members with Hotel Name & Room No* 
+{membersDetailswithRoomDetails}  
+
+
+*Hotel Address:*  
+{hotelAddress}
+
+
+Check-In : 03/Feb/2027 : Morning
+Check-Out: 07/Feb/2027 : 12:00 Noon
+
+
+*Mela Venue*
+Pandharpur (about 500 metres from the Vittal Temple)
+📞 +91 99439 11030
+*Room occupancy:* {roomOccupancy}
+
+Note: Room and hotel allocations are subject to change based on administrative requirements.
+
+With prayers,  
+*Krishna Kudumbam Charitable & Religious Trust*  
+Hare Rama Hare Rama Rama Rama Hare Hare  
+Hare Krishna Hare Krishna Krishna Krishna Hare Hare
+

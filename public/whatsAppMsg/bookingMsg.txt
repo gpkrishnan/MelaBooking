@@ -1,0 +1,58 @@
+*ராதேகிருஷ்ணா*
+
+உங்கள் *பண்டரிபுரம் நாமஸங்கீர்த்தன மேளா 2027*க்கான பணம் வெற்றிகரமாக பெறப்பட்டுள்ளது. நன்றி! 
+
+*பதிவு குறிப்பு எண்:* {registrationRef}  
+*பெறப்பட்ட தொகை:* {amount}  
+*பணம் பெற்ற தேதி:* {paymentDate}  
+*பணம் பெற்ற விவரம்:* {paymentDetails}
+
+*பதிவு விவரங்கள்:*  
+*பெயர்:* {groupHeadName}  
+*தொலைபேசி எண்:* {phone}  
+*தங்கும் இட வகை:* {accommodationDetails}
+*அறை பகிர்வு:* {roomOccupancyTa}
+
+*பதிவுசெய்யப்பட்ட உறுப்பினர்கள்:*  
+{membersDetails}
+
+உங்கள் பதிவு இப்போது *உறுதிசெய்யப்பட்டது.*  
+மேளாவிற்கு *2 நாட்களுக்கு முன்னர்* தங்கும் இடம் விவரங்கள் பகிரப்படும்.
+
+அன்புடன்,      
+*Krishna Kudumbam Charitable & Religious Trust*  
+ஹரே ராம ஹரே ராம ராம ராம ஹரே ஹரே  
+ஹரே கிருஷ்ண ஹரே கிருஷ்ண கிருஷ்ண கிருஷ்ண ஹரே ஹரே
+
+
+-----------------------------------
+
+*Radhekrishna*
+
+Your payment for the *Pandharpur Nama Sankeerthana Mela 2027* has been received successfully. Thank you!
+
+*Registration Reference No:* {registrationRef}  
+*Amount Received:* {amount}  
+*Date of Payment:* {paymentDate}  
+*Receipt Details:* {paymentDetails}
+
+*Registration Details:*  
+*Your Name:* {groupHeadName}  
+*Contact No:* {phone}  
+*Accommodation Type:* {accommodationDetails}
+*Room occupancy:* {roomOccupancy}
+
+*Registered Members:*  
+{membersDetails}
+
+Your registration is now *confirmed.*  
+Accommodation details will be shared *2 days in advance* to the mela.
+
+With prayers,  
+*Krishna Kudumbam Charitable & Religious Trust*  
+Hare Rama Hare Rama Rama Rama Hare Hare  
+Hare Krishna Hare Krishna Krishna Krishna Hare Hare 
+
+
+
+
