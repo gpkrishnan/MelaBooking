@@ -1,6 +1,8 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 require_once '../base/connection.php';
+require_once '../lib/roomsplan.php';
+ensure_related_group_column($ts); // the list returns F.*, so related_group comes with it
 $out = [];
 
 $query = "SELECT F.* FROM families F  ORDER BY familyid ASC";

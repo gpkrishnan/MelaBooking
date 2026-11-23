@@ -57,7 +57,8 @@ if (isset($_POST['id'])) {
     $token = !empty($_POST['submit_token']) ? substr(preg_replace('/[^A-Za-z0-9\-]/', '', $_POST['submit_token']), 0, 40) : null;
     ensure_rooms_plan_column($ts);
     ensure_share_column($ts);
-    $setPlan   = array_key_exists('roomsplan', $_POST); // sent only when the room split was set or changed, so old bookings are left as they are
+    ensure_related_group_column($ts);
+    $setPlan  = array_key_exists('roomsplan', $_POST); // sent only when the room split was set or changed, so old bookings are left as they are
     $roomsPlan = $setPlan ? normalize_rooms_plan($_POST['roomsplan']) : '';
     if ($roomsPlan === null) { echo json_encode(['success' => false, 'message' => 'Rooms plan must be numbers like 2+3 (people in each room)']); exit; }
     $cancelling = (($_POST['brn']['booking_status'] ?? '') == 'C');
@@ -162,8 +163,12 @@ if (isset($_POST['id'])) {
             exit;
         }
     }
+    if (isset($id) && array_key_exists('related_group', $_POST)) { // legend of related bookings; '' removes the booking from its group
+        $rg = normalize_related_group($ts, $_POST['related_group']);
+        mysqli_query($ts, 'UPDATE families SET related_group=' . GSLV($rg, 'text') . ' WHERE familyid=' . intval($id));
+    }
     if (isset($id)) {
-        if (! isset($_POST['brn']) || '' == $_POST['brn']['booking_date']) {
+        if (! isset($_POST['brn'])|| '' == $_POST['brn']['booking_date']) {
             $bookdt = date('Y-m-d');
         } else {
             $bookdt = date('Y-m-d', strtotime($_POST['brn']['booking_date']));
@@ -222,6 +227,15 @@ if (isset($_POST['id'])) {
                 } else {
                     $totmem = sizeof($_POST['members']);
                 }
+                // One save per booking at a time: a repeated/concurrent request waits, then finds the members already saved
+                $saveLock = mysqli_real_escape_string($ts, 'family_save_' . intval($id));
+                mysqli_query($ts, "SELECT GET_LOCK('$saveLock', 15)");
+                $handledIds = []; // member rows already saved by this request
+                foreach ($_POST['members'] as $mm) {
+                    if (intval($mm['memberid'] ?? 0) > 0) {
+                        $handledIds[] = intval($mm['memberid']);
+                    }
+                }
                 for ($m = 0; $m < sizeof($_POST['members']); $m++) {
                     if (($m + 1) < 10) {
                         $memno = "0" . ($m + 1);
@@ -253,7 +267,19 @@ if (isset($_POST['id'])) {
                     }
 
                     $kkid = ($id + 5100) . "-" . $totmem . "-" . $memno;
-                    if (0 == $_POST['members'][$m]['memberid']) {
+                    $mid  = intval($_POST['members'][$m]['memberid'] ?? 0);
+                    if (0 == $mid) { // a new member: if this exact person was already added to the booking (repeated save), update that row instead of adding a second one
+                        $ex = mysqli_query($ts, 'SELECT memberid FROM members WHERE familyid=' . intval($id)
+                            . " AND LOWER(TRIM(name))=LOWER(TRIM(" . GSLV($_POST['members'][$m]['name'], 'text') . "))"
+                            . ' AND age=' . intval($_POST['members'][$m]['age'] ?? 0)
+                            . ' AND sex=' . GSLV($_POST['members'][$m]['sex'], 'text')
+                            . (count($handledIds) ? ' AND memberid NOT IN (' . implode(',', $handledIds) . ')' : '') . ' LIMIT 1');
+                        $exRow = $ex ? mysqli_fetch_row($ex) : null;
+                        if ($exRow) {
+                            $mid = intval($exRow[0]);
+                        }
+                    }
+                    if (0 == $mid) {
                         $query2 = sprintf("INSERT INTO members (`name`,`photoidno`,phone,sex,age,familyid,p_roomtype,p_toilet,p_floor,p_cot,bedid, arr_mode,arr_train_no,arr_train_time,arr_city,pickup_bus,checkin_time,checkout_time,dep_mode,dep_train_no,dep_time,dep_city,drop_bus,KKID, arr_seat_no, dep_seat_no) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s, %s, %s)",
                             GSLV($_POST['members'][$m]['name'], "text"),
                             GSLV($_POST['members'][$m]['photoid'], "text"),
@@ -310,14 +336,16 @@ if (isset($_POST['id'])) {
                             GSLV($kkid, "text"),
                             GSLV($_POST['members'][$m]['arrival']['seat'], "text"),
                             GSLV($_POST['members'][$m]['depature']['seat'], "text"),
-                            GSLV($_POST['members'][$m]['memberid'], "int"));
+                            $mid);
                     }
                     if (! mysqli_query($ts, $query2)) {
                         $out = ['success' => false, 'message' => 'Failed to save member', 'error' => mysqli_error($ts)];
                         echo json_encode($out);
                         exit;
                     }
+                    $handledIds[] = $mid > 0 ? $mid : mysqli_insert_id($ts);
                 }
+                mysqli_query($ts, "SELECT RELEASE_LOCK('$saveLock')");
             }
 
             if (0 != $_POST['id']) {

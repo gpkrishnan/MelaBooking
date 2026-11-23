@@ -9,6 +9,31 @@ function ensure_rooms_plan_column($ts)
     }
 }
 
+// ---- Related bookings (families that come together: same hotel, preferably next-door rooms) ----
+// families.related_group is a free-text legend (e.g. "Pune Satsang"). Bookings with the same legend form one group.
+// Unrelated to combine_no, which is only for single-person bookings sharing one room.
+function ensure_related_group_column($ts)
+{
+    $r = mysqli_query($ts, "SHOW COLUMNS FROM families LIKE 'related_group'");
+    if ($r && mysqli_num_rows($r) == 0) {
+        mysqli_query($ts, "ALTER TABLE families ADD COLUMN related_group VARCHAR(40) NULL DEFAULT NULL, ADD INDEX idx_families_related_group (related_group)");
+    }
+}
+
+// Tidies the typed legend and re-uses the spelling of an existing group (case-insensitive), so "pune satsang"
+// and "Pune Satsang" never become two groups. Returns '' for none.
+function normalize_related_group($ts, $raw)
+{
+    $v = trim(preg_replace('/\s+/u', ' ', (string) $raw));
+    if ($v === '') {
+        return '';
+    }
+    $v = mb_substr($v, 0, 40, 'UTF-8');
+    $res = mysqli_query($ts, "SELECT related_group FROM families WHERE related_group='" . mysqli_real_escape_string($ts, $v) . "' LIMIT 1");
+    $row = $res ? mysqli_fetch_row($res) : null;
+    return $row ? $row[0] : $v;
+}
+
 // Accepts "2+3", "2,3" or a JSON array; returns the JSON text to store, '' for none, or null when invalid.
 function normalize_rooms_plan($raw)
 {

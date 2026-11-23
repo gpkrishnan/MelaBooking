@@ -146,11 +146,13 @@ const BookingForm = ({ open = false, familyId = 0, initialData, onSave, onCancel
         sharename: "",
         combineno: null,
         sharetouched: false,
+        relatedgroup: "", // legend shared by related bookings (same hotel, rooms close together)
     });
 
     // Members state
     const [members, setMembers] = useState([]);
     const [saving, setSaving] = useState(false); // blocks double-clicks on Save
+    const savingRef = useRef(false);
     const [bookingNo, setBookingNo] = useState(""); // admin-chosen booking number (1-100) for a brand-new booking
     const submitTokenRef = useRef(null); // one token per opened new-booking form: repeats are recognised by the server
     const [editingMember, setEditingMember] = useState(null);
@@ -203,6 +205,13 @@ const BookingForm = ({ open = false, familyId = 0, initialData, onSave, onCancel
         { revalidateOnFocus: false }
     );
 
+    // Existing related-booking legends (with booking count and hotels so far), for the "Related group" field
+    const { data: relatedGroups = [], mutate: reloadRelatedGroups } = useSWR("data/related_groups.php", (url) => fetcher(url, { method: "GET" }), {
+        revalidateOnFocus: false,
+    });
+    const relatedTyped = (family.relatedgroup || "").trim().replace(/\s+/g, " ");
+    const relatedMatch = relatedTyped ? relatedGroups.find((g) => g.name.toLowerCase() === relatedTyped.toLowerCase()) : null;
+
     // Member form state - will be initialized from defaultValues
     const [memberForm, setMemberForm] = useState({
         memberid: 0,
@@ -232,10 +241,15 @@ const BookingForm = ({ open = false, familyId = 0, initialData, onSave, onCancel
     });
 
     // Load family data with SWR
-    const { data: familyData } = useSWR(familyId && familyId !== 0 ? ["data/singlefamily.php", familyId] : null, ([url, id]) => fetcher(url, { method: "POST", data: { familyid: id } }), {
+    const { data: familyData, mutate: reloadFamily } = useSWR(familyId && familyId !== 0 ? ["data/singlefamily.php", familyId] : null, ([url, id]) => fetcher(url, { method: "POST", data: { familyid: id } }), {
         revalidateOnFocus: false,
         revalidateOnReconnect: false,
     });
+
+    // The cached copy may be stale (changed by a save, or elsewhere): refetch each time the form opens on an existing booking
+    useEffect(() => {
+        if (open && familyId) reloadFamily();
+    }, [open, familyId]); // eslint-disable-line react-hooks/exhaustive-deps
 
     // Update form state when family data is loaded
     useEffect(() => {
@@ -258,6 +272,7 @@ const BookingForm = ({ open = false, familyId = 0, initialData, onSave, onCancel
                 sharename: fData.share_name || "",
                 combineno: fData.combine_no || null,
                 sharetouched: false,
+                relatedgroup: fData.related_group || "",
             }));
 
             if (fData.brn) {
@@ -540,7 +555,7 @@ const BookingForm = ({ open = false, familyId = 0, initialData, onSave, onCancel
     };
 
     const handleSave = async () => {
-        if (saving) return;
+        if (saving || savingRef.current) return; // the ref blocks a second click before the state has updated
         if (!family.leader || !family.city || !family.whatsapp) {
             toast.error("Please fill all required fields (Leader name, City, WhatsApp)");
             return;
@@ -571,6 +586,7 @@ const BookingForm = ({ open = false, familyId = 0, initialData, onSave, onCancel
         }
 
         if (!submitTokenRef.current) submitTokenRef.current = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2)).replace(/-/g, "").slice(0, 32);
+        savingRef.current = true;
         setSaving(true);
         try {
             // Structure data to match PHP backend expectations
@@ -586,6 +602,7 @@ const BookingForm = ({ open = false, familyId = 0, initialData, onSave, onCancel
                 phone: family.phone2,
                 fremarks: family.fremarks,
                 address: family.address,
+                related_group: family.relatedgroup,
                 roomcategory: family.roomcategory,
                 ...(roomsEdited && family.roomkind ? { roomsplan: family.roomkind === "DOR" ? "" : family.roomsplan.join("+") } : {}),
                 ...(family.sharetouched ? { share_ref: members.length === 1 ? family.shareref.trim() : "" } : {}),
@@ -643,6 +660,8 @@ const BookingForm = ({ open = false, familyId = 0, initialData, onSave, onCancel
             // Handle JSON response
             if (result.success) {
                 submitTokenRef.current = null;
+                reloadRelatedGroups();
+                if (familyId) await reloadFamily(); // show the saved values (status, new member ids, rooms) without a page refresh
                 if (onSave) onSave(result.familyid);
                 toast.success(result.duplicate_submit ? "Already saved (duplicate click ignored)" : result.message || "Booking saved successfully!");
                 const cs = result.contacts_sync;
@@ -658,6 +677,7 @@ const BookingForm = ({ open = false, familyId = 0, initialData, onSave, onCancel
             console.error("Error saving:", error);
             toast.error("Connection error: " + (error.message || "Failed to save booking"));
         } finally {
+            savingRef.current = false;
             setSaving(false);
         }
     };
@@ -890,6 +910,42 @@ const BookingForm = ({ open = false, familyId = 0, initialData, onSave, onCancel
                                     <div>
                                         <Label htmlFor="remarks">Remarks</Label>
                                         <Textarea id="remarks" value={family.fremarks} onChange={(e) => handleFamilyChange("fremarks", e.target.value)} placeholder="Remarks" rows={3} />
+                                    </div>
+                                    <div>
+                                        <Label htmlFor="relatedgroup" className="flex items-center gap-2">
+                                            <Users className="w-4 h-4" />
+                                            Related group (legend)
+                                        </Label>
+                                        <div className="flex items-center gap-1">
+                                            <Input
+                                                id="relatedgroup"
+                                                list="related-groups-list"
+                                                maxLength={40}
+                                                value={family.relatedgroup || ""}
+                                                onChange={(e) => handleFamilyChange("relatedgroup", e.target.value)}
+                                                placeholder="Pick an existing group or type a new name"
+                                                autoComplete="off"
+                                            />
+                                            {family.relatedgroup && (
+                                                <Button type="button" variant="ghost" size="sm" onClick={() => handleFamilyChange("relatedgroup", "")} title="Remove from group">
+                                                    <X className="w-4 h-4" />
+                                                </Button>
+                                            )}
+                                        </div>
+                                        <datalist id="related-groups-list">
+                                            {relatedGroups.map((g) => (
+                                                <option key={g.name} value={g.name}>
+                                                    {g.bookings} booking(s){g.hotels.length ? ` - ${g.hotels.join(", ")}` : ""}
+                                                </option>
+                                            ))}
+                                        </datalist>
+                                        <p className="text-xs text-muted-foreground mt-1">
+                                            {!relatedTyped
+                                                ? "Bookings of people who come together share a legend, so they can be given rooms in the same hotel, close to each other."
+                                                : relatedMatch
+                                                  ? `Existing group "${relatedMatch.name}": ${relatedMatch.bookings} booking(s)${relatedMatch.hotels.length ? `, hotel: ${relatedMatch.hotels.map((h) => formatHotelName(h)).join(", ")}` : ", no rooms allotted yet"}.`
+                                                  : `New group "${relatedTyped}" will be created when you save.`}
+                                        </p>
                                     </div>
                                     <div className="space-y-3 rounded-md border p-3">
                                         <Label className="flex items-center gap-2">

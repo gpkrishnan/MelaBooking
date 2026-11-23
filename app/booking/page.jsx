@@ -10,6 +10,14 @@ import WithAuth from "@/components/WithAuth";
 
 import useSWR from "swr";
 
+// Stable colour per legend, so related bookings are easy to spot on the page
+const LEGEND_COLORS = ["bg-rose-100 text-rose-800 border-rose-300", "bg-sky-100 text-sky-800 border-sky-300", "bg-amber-100 text-amber-800 border-amber-300", "bg-emerald-100 text-emerald-800 border-emerald-300", "bg-violet-100 text-violet-800 border-violet-300", "bg-orange-100 text-orange-800 border-orange-300", "bg-teal-100 text-teal-800 border-teal-300", "bg-fuchsia-100 text-fuchsia-800 border-fuchsia-300"];
+const legendColor = (name) => {
+    let h = 0;
+    for (const ch of name.toLowerCase()) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+    return LEGEND_COLORS[h % LEGEND_COLORS.length];
+};
+
 const BookingContent = () => {
     const { data, error, isLoading, mutate } = useSWR("data/members_full_list.php", (url) => fetcher(url, { method: "GET" }));
     const [searchTerm, setSearchTerm] = useState("");
@@ -38,6 +46,9 @@ const BookingContent = () => {
         return data.filter((fmly) => {
             // Search in family leader name
             if (fmly.leader?.toLowerCase().includes(lowerSearch)) return true;
+
+            // Search in related-group legend
+            if (fmly.related_group?.toLowerCase().includes(lowerSearch)) return true;
 
             // Search in group number
             if (fmly.groupNo?.toString().toLowerCase().includes(lowerSearch)) return true;
@@ -174,6 +185,21 @@ const BookingContent = () => {
                                             {fmly.status} <div className={`h-2 w-2 sm:h-3 sm:w-3 rounded-full border ${fmly.status == "A" ? "bg-gray-600" : fmly.status == "B" ? "bg-lime-600" : "bg-indigo-500"}`}></div>
                                         </div>
                                     </div>
+                                    {fmly.related_group && (
+                                        <div className="px-1 sm:px-2 py-0.5 text-[9px] sm:text-xs">
+                                            <button
+                                                type="button"
+                                                title="Show all bookings in this group"
+                                                className={`font-semibold border px-1 rounded cursor-pointer ${legendColor(fmly.related_group)}`}
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setSearchTerm(fmly.related_group);
+                                                }}
+                                            >
+                                                &#128279; {fmly.related_group}
+                                            </button>
+                                        </div>
+                                    )}
                                     {fmly.RECEIPT_NO && (
                                         <div className="px-1 sm:px-2 py-0.5 text-[9px] sm:text-xs">
                                             <span className="text-green-700 font-semibold font-mono bg-green-50 border border-green-200 px-1 rounded">&#128176; {fmly.RECEIPT_NO}</span>

@@ -14,6 +14,7 @@ require_once '../base/connection.php';
 require_once '../lib/roomsplan.php';
 ensure_rooms_plan_column($ts);
 ensure_share_column($ts);
+ensure_related_group_column($ts);
 
 // Get JSON data from request body
 $json = file_get_contents('php://input');
@@ -61,7 +62,8 @@ if (isset($_POST['familyid'])) {
                     $plan = GFV($database_prebooking . '.group_head', 'rooms_plan', 'mela_regn_id=' . intval($row['fmlyid']));
                 }
                 $out[$a]['rooms_plan']            = $plan ? (json_decode($plan, true) ?: []) : [];
-                $out[$a]['combine_no']            = $row['combine_no'] === null ? null : intval($row['combine_no']);
+                $out[$a]['related_group']         = $row['related_group'] ?? '';
+                $out[$a]['combine_no']            =$row['combine_no'] === null ? null : intval($row['combine_no']);
                 $others = [];
                 if ($row['combine_no'] !== null) {
                     $or = mysqli_query($ts, 'SELECT familyid, leader FROM families WHERE combine_no=' . intval($row['combine_no']) . ' AND familyid<>' . intval($row['fmlyid']) . ' ORDER BY familyid');
